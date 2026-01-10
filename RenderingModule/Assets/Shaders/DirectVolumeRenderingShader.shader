@@ -190,6 +190,25 @@
                 float3 tmp = ray.startPos;
                 ray.startPos = ray.endPos;
                 ray.endPos = tmp;
+
+                // --- 修复开始: 处理摄像机在内部的情况 ---
+                // 将摄像机世界坐标转换为局部纹理空间坐标 (0.0 到 1.0)
+                // 假设模型是中心点在(0,0,0)且大小为1的立方体，所以偏移+0.5
+                float3 camPosObj = mul(unity_WorldToObject, float4(_WorldSpaceCameraPos, 1.0)).xyz;
+                float3 camPosTex = camPosObj + float3(0.5f, 0.5f, 0.5f);
+
+                // 简单的 AABB 检测：看摄像机是否在 0-1 的范围内
+                bool isInside = (camPosTex.x >= 0.0 && camPosTex.x <= 1.0 &&
+                                 camPosTex.y >= 0.0 && camPosTex.y <= 1.0 &&
+                                 camPosTex.z >= 0.0 && camPosTex.z <= 1.0);
+
+                if (isInside)
+                {
+                    // 如果在内部，光线必须从摄像机位置开始，而不是从背后的盒子表面开始
+                    ray.startPos = camPosTex;
+                }
+                // --- 修复结束 ---
+
                 return ray;
             }
 
