@@ -27,8 +27,9 @@
         _ClipedHeight("clipedHeight", Range(0.0, 0.99)) = 0.99
         
         // --- 内部观察与手电筒工具属性 ---
-        _FlashlightPos("Flashlight Position (Local 0-1)", Vector) = (0,0,0,0)
-        _FlashlightRadius("Flashlight Radius", Range(0.0, 0.5)) = 0.0
+        _FlashlightPos("Flashlight Position", Vector) = (0,0,0,0)
+        _FlashlightForward("Flashlight Forward Dir", Vector) = (0,0,1,0) // [新增]
+        _FlashlightRadius("Flashlight Radius", Range(0.0, 2.0)) = 0.0
         
         // 全局缩放：用于解决"雾墙"
         _InternalDensityScale("Internal Density Scale", Range(0.001, 1.0)) = 0.05
@@ -122,6 +123,7 @@
             
             // 变量声明
             float3 _FlashlightPos;
+            float3 _FlashlightForward; // [新增] 必须与 Properties 对应 float3 或 float4
             float _FlashlightRadius;
             float _InternalDensityScale;
             float _EdgeContribution;
@@ -337,8 +339,28 @@
             // --- 核心渲染函数 ---
             frag_out frag_VolumeSTCube(frag_in i)
             {
+                // 1. 获取光线 (这里面已经包含了起点修正逻辑)
                 RayInfo ray = getRayFront2Back(i.vertexLocal);
                 RaymarchInfo raymarchInfo = initRaymarch(ray, 512);
+
+                // --- 新增：智能判断逻辑 ---
+                // 计算摄像机是否在体积内部
+                float3 camPosObj = mul(unity_WorldToObject, float4(_WorldSpaceCameraPos, 1.0)).xyz;
+                float3 camPosTex = camPosObj + float3(0.5f, 0.5f, 0.5f);
+                bool isInside = (camPosTex.x >= 0.0 && camPosTex.x <= 1.0 &&
+                                 camPosTex.y >= 0.0 && camPosTex.y <= 1.0 &&
+                                 camPosTex.z >= 0.0 && camPosTex.z <= 1.0);
+
+                // --- 动态参数选择 ---
+                // 如果在内部：使用材质面板上设置的 X-Ray 参数 (_InternalDensityScale 等)
+                // 如果在外部：强制恢复标准 DVR 参数 (Scale=1.0, BaseAlpha=1.0, 关闭边缘削弱)
+                
+                float activeDensityScale = isInside ? _InternalDensityScale : 1.0;
+                float activeBaseAlpha    = isInside ? _BaseDensityAlpha     : 1.0;
+                // 在外部时，将 EdgeContribution 设为 0，防止边缘逻辑改变透明度
+                // 在内部时，使用面板设置的值
+                float activeEdgeContrib  = isInside ? _EdgeContribution     : 0.0; 
+
 
                 float3 lightDir = normalize(ObjSpaceViewDir(float4(float3(0.0f, 0.0f, 0.0f), 0.0f)));
                 ray.startPos += (JITTER_FACTOR * ray.direction * raymarchInfo.stepSize) * tex2D(_NoiseTex, float2(i.uv.x, i.uv.y)).r;
@@ -357,8 +379,16 @@
                     if(IsCutout(currPos)) continue;
 #endif
                     
-                    // 2. 手电筒挖洞逻辑
-                    if (_FlashlightRadius > 0.0 && distance(currPos, _FlashlightPos) < _FlashlightRadius) continue;
+                    // --- 唯一的挖洞逻辑：平面切片 ---
+                    if (_FlashlightRadius > 0.0)
+                    {
+                        float3 toSample = currPos - _FlashlightPos;
+                        // 使用 Forward 向量确保平面平整
+                        float distPlane = dot(toSample, normalize(_FlashlightForward));
+
+                        // 只切前方 && 小于半径
+                        if (distPlane > 0.0 && distPlane < _FlashlightRadius) continue;
+                    }
 
                     // 3. 采样密度
                     float density = getDensity(currPos);
@@ -382,19 +412,22 @@
 #endif
                     
                     // --- 4. 混合透明度调制 (Gradient + Base Blend) ---
-                    // edgeFactor: 0.0(平坦) -> 1.0(边缘)
+                    // 使用 activeEdgeContrib 和 activeBaseAlpha
+                    
                     float edgeFactor = smoothstep(_MinGradient, _MinGradient + 0.1, gradMag);
                     
-                    // 混合公式：
-                    // 在平坦处，使用 _BaseDensityAlpha (保留一点颜色)
-                    // 在边缘处，使用 1.0 (完全不透明显示)
-                    // _EdgeContribution 可以进一步放大边缘的权重
-                    float opacityModulator = lerp(_BaseDensityAlpha, 1.0,  min(edgeFactor * _EdgeContribution, 1.0));
+                    // 逻辑推演：
+                    // 当在外部时 (activeEdgeContrib=0, activeBaseAlpha=1):
+                    // opacityModulator = lerp(1.0, 1.0, 0) = 1.0 -> 原始透明度不变。
+                    // 当在内部时 (activeEdgeContrib>0, activeBaseAlpha=0.1):
+                    // opacityModulator < 1.0 -> 变得透明。
+                    float opacityModulator = lerp(activeBaseAlpha, 1.0,  min(edgeFactor * activeEdgeContrib, 1.0));
                     
                     src.a *= opacityModulator;
 
                     // --- 5. 全局密度缩放 (解决雾墙) ---
-                    src.a *= _InternalDensityScale;
+                    // 在外部时 activeDensityScale 为 1.0，无影响
+                    src.a *= activeDensityScale;
 
                     // --- 6. 光照 ---
 #if defined(LIGHTING_ON)
