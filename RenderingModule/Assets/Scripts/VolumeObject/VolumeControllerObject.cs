@@ -70,7 +70,7 @@ namespace UnityVolumeRendering
         [SerializeField, HideInInspector]
         private bool cubicInterpolationEnabled = false;
 
-        // ¼ÆËãäÖÈ¾Ìå¸ß¶È
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½ß¶ï¿½
         [SerializeField, HideInInspector]
         private float volumeHeight = 0;
 
@@ -81,7 +81,7 @@ namespace UnityVolumeRendering
         public void Awake()
         {
             meshRenderers = new MeshRenderer[transform.childCount];
-            //  ÔÚ×ÓÀàÖÐÕÒµ½ËùÓÐµÄVolumeContainerObject
+            //  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½Ðµï¿½VolumeContainerObject
             for (int i = 0; i < transform.childCount; i++)
             {
                 meshRenderers[i] = transform.GetChild(i).GetChild(0).GetComponent<MeshRenderer>();
@@ -259,7 +259,7 @@ namespace UnityVolumeRendering
             return meshRenderers[meshRenderers.Length - 1].transform.position.y + GetHeight() / 2 / meshRenderers.Length;
         }
 
-        // ÕûÌåÌáÉýÌåµÄÍ¸Ã÷¶È
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½
         public void SetOpacity(float opacity)
         {
             opacity -= 0.5f;
@@ -504,15 +504,15 @@ namespace UnityVolumeRendering
             meshRenderers[index].sharedMaterial.SetFloat("_CircleY", highlightPosition.y);
             meshRenderers[index].sharedMaterial.SetFloat("_CircleRadius", highlightRadius);
 
-            //  Cliped HeightÐèÒª·Ö¿é¼ÆËã
-            //  Èç¹ûindex < floor(cliped_height * meshRenderers.Length), index_height = 1
-            //  Èç¹ûindex > floor(cliped_height * meshRenderers.Length), index_height = 0
-            //  Èç¹ûindex = floor(cliped_height * meshRenderers.Length), index_height = 1 - frac(cliped_height * meshRenderers.Length)
+            //  Cliped Heightï¿½ï¿½Òªï¿½Ö¿ï¿½ï¿½ï¿½ï¿½
+            //  ï¿½ï¿½ï¿½index < floor(cliped_height * meshRenderers.Length), index_height = 1
+            //  ï¿½ï¿½ï¿½index > floor(cliped_height * meshRenderers.Length), index_height = 0
+            //  ï¿½ï¿½ï¿½index = floor(cliped_height * meshRenderers.Length), index_height = 1 - frac(cliped_height * meshRenderers.Length)
             float index_heightX;
             float index_heightY;
             float clipedHeightBottom = clipedHeightWindow.x;
             float clipedHeightTop = clipedHeightWindow.y;
-            //  ÅÐ¶Ïµ×²¿²ÃÇÐ
+            //  ï¿½Ð¶Ïµ×²ï¿½ï¿½ï¿½ï¿½ï¿½
             if (index < Mathf.Floor(clipedHeightBottom * meshRenderers.Length))
             {
                 index_heightX = 1;
@@ -526,7 +526,7 @@ namespace UnityVolumeRendering
                 index_heightX = (clipedHeightBottom * meshRenderers.Length - Mathf.Floor(clipedHeightBottom * meshRenderers.Length));
             }
 
-            //  ÅÐ¶Ï¶¥²¿²ÃÇÐ
+            //  ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (index < Mathf.Floor(clipedHeightTop * meshRenderers.Length))
             {
                 index_heightY = 1;
@@ -541,7 +541,7 @@ namespace UnityVolumeRendering
                 index_heightY = (clipedHeightTop * meshRenderers.Length - Mathf.Floor(clipedHeightTop * meshRenderers.Length));
             }
 
-            //  Èç¹ûindex_heightX = 1 »òÕß index_heightY = 0, Ôò²»äÖÈ¾
+            //  ï¿½ï¿½ï¿½index_heightX = 1 ï¿½ï¿½ï¿½ï¿½ index_heightY = 0, ï¿½ï¿½ï¿½ï¿½È¾
             if(index_heightX == 1 || index_heightY == 0)
             {
                 volumeContainerObjects[index].gameObject.SetActive(false);

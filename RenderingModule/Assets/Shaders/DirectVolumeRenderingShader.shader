@@ -341,7 +341,7 @@
             {
                 // 1. 获取光线 (这里面已经包含了起点修正逻辑)
                 RayInfo ray = getRayFront2Back(i.vertexLocal);
-                RaymarchInfo raymarchInfo = initRaymarch(ray, 512);
+                RaymarchInfo raymarchInfo = initRaymarch(ray, 1024);
 
                 // --- 新增：智能判断逻辑 ---
                 // 计算摄像机是否在体积内部
@@ -462,9 +462,9 @@
              // Maximum Intensity Projection mode
             frag_out frag_mip(frag_in i)
             {
-                #define MAX_NUM_STEPS 512
+                #define MAX_NUM_STEPS 1024
                 RayInfo ray = getRayBack2Front(i.vertexLocal);
-                RaymarchInfo raymarchInfo = initRaymarch(ray, 512);
+                RaymarchInfo raymarchInfo = initRaymarch(ray, 1024);
                 float maxDensity = 0.0f;
                 float3 maxDensityPos = ray.startPos;
                 for (int iStep = 0; iStep < raymarchInfo.numSteps; iStep++)

@@ -1,0 +1,10 @@
+# Unity Project Backup
+RenderingModule/Library_backup/
+
+# Large Data Files
+*.raw
+*.raw.ini
+DataTransformationModule/MyData/
+
+# System Files
+.DS_Store
