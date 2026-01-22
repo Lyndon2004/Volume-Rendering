@@ -1,0 +1,362 @@
+[
+    {
+        "filename": "volume_chlorophyll_data_time_0_255.raw.ini",
+        "time_index": 0,
+        "centroid": [
+            144.36339173229044,
+            212.49615282667963,
+            32.48895970116985
+        ],
+        "has_data": true,
+        "volume_voxels": 1880543,
+        "max_value": 208
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_1_255.raw.ini",
+        "time_index": 1,
+        "centroid": [
+            144.72922277860047,
+            213.00681493933214,
+            32.88438738794454
+        ],
+        "has_data": true,
+        "volume_voxels": 1838500,
+        "max_value": 231
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_2_255.raw.ini",
+        "time_index": 2,
+        "centroid": [
+            145.18874937121598,
+            212.1782894267998,
+            33.16914450493571
+        ],
+        "has_data": true,
+        "volume_voxels": 1784101,
+        "max_value": 254
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_3_255.raw.ini",
+        "time_index": 3,
+        "centroid": [
+            145.6101264946229,
+            211.93352605417866,
+            33.02597953035061
+        ],
+        "has_data": true,
+        "volume_voxels": 1784427,
+        "max_value": 228
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_4_255.raw.ini",
+        "time_index": 4,
+        "centroid": [
+            146.7502309481971,
+            212.7742311105583,
+            32.44805310702457
+        ],
+        "has_data": true,
+        "volume_voxels": 1825824,
+        "max_value": 234
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_5_255.raw.ini",
+        "time_index": 5,
+        "centroid": [
+            147.8469839771044,
+            213.5329478918145,
+            32.392543724535585
+        ],
+        "has_data": true,
+        "volume_voxels": 1840077,
+        "max_value": 225
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_6_255.raw.ini",
+        "time_index": 6,
+        "centroid": [
+            148.89631124547492,
+            214.41588218977262,
+            32.96932828954477
+        ],
+        "has_data": true,
+        "volume_voxels": 1821697,
+        "max_value": 225
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_7_255.raw.ini",
+        "time_index": 7,
+        "centroid": [
+            149.53161573442037,
+            214.6047593463622,
+            33.58928326984026
+        ],
+        "has_data": true,
+        "volume_voxels": 1786939,
+        "max_value": 232
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_8_255.raw.ini",
+        "time_index": 8,
+        "centroid": [
+            148.70822191510425,
+            214.11572016777387,
+            34.73631672558959
+        ],
+        "has_data": true,
+        "volume_voxels": 1733646,
+        "max_value": 237
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_9_255.raw.ini",
+        "time_index": 9,
+        "centroid": [
+            147.93794946599155,
+            215.8814393725626,
+            35.970116154183714
+        ],
+        "has_data": true,
+        "volume_voxels": 1677397,
+        "max_value": 230
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_10_255.raw.ini",
+        "time_index": 10,
+        "centroid": [
+            148.4123347281263,
+            219.7724441271136,
+            36.7218910800047
+        ],
+        "has_data": true,
+        "volume_voxels": 1636151,
+        "max_value": 240
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_11_255.raw.ini",
+        "time_index": 11,
+        "centroid": [
+            149.27118619296985,
+            224.50985506922808,
+            37.55382681232716
+        ],
+        "has_data": true,
+        "volume_voxels": 1561343,
+        "max_value": 243
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_12_255.raw.ini",
+        "time_index": 12,
+        "centroid": [
+            151.94186616522842,
+            231.51269751924931,
+            38.144698296853434
+        ],
+        "has_data": true,
+        "volume_voxels": 1491455,
+        "max_value": 209
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_13_255.raw.ini",
+        "time_index": 13,
+        "centroid": [
+            154.1609850152576,
+            234.89732024641393,
+            37.886361625466
+        ],
+        "has_data": true,
+        "volume_voxels": 1410452,
+        "max_value": 202
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_14_255.raw.ini",
+        "time_index": 14,
+        "centroid": [
+            156.1996910301505,
+            236.57935525325496,
+            37.18468867984509
+        ],
+        "has_data": true,
+        "volume_voxels": 1353173,
+        "max_value": 214
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_15_255.raw.ini",
+        "time_index": 15,
+        "centroid": [
+            157.32101236155083,
+            239.59374574787523,
+            36.584658367062204
+        ],
+        "has_data": true,
+        "volume_voxels": 1323791,
+        "max_value": 192
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_16_255.raw.ini",
+        "time_index": 16,
+        "centroid": [
+            156.42105764865892,
+            241.6712112604796,
+            37.42845818829069
+        ],
+        "has_data": true,
+        "volume_voxels": 1310145,
+        "max_value": 179
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_17_255.raw.ini",
+        "time_index": 17,
+        "centroid": [
+            153.62661865934274,
+            238.07489628992562,
+            37.272220743788566
+        ],
+        "has_data": true,
+        "volume_voxels": 1313119,
+        "max_value": 186
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_18_255.raw.ini",
+        "time_index": 18,
+        "centroid": [
+            149.56860213009608,
+            230.14619072837235,
+            37.07733418557869
+        ],
+        "has_data": true,
+        "volume_voxels": 1279077,
+        "max_value": 197
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_19_255.raw.ini",
+        "time_index": 19,
+        "centroid": [
+            147.2803090256131,
+            224.3415067278219,
+            36.54137399568557
+        ],
+        "has_data": true,
+        "volume_voxels": 1239028,
+        "max_value": 234
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_20_255.raw.ini",
+        "time_index": 20,
+        "centroid": [
+            146.51320306488824,
+            222.45886613102215,
+            36.67887761900538
+        ],
+        "has_data": true,
+        "volume_voxels": 1245188,
+        "max_value": 245
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_21_255.raw.ini",
+        "time_index": 21,
+        "centroid": [
+            145.89342849919893,
+            221.13409596305033,
+            37.228901203376715
+        ],
+        "has_data": true,
+        "volume_voxels": 1263280,
+        "max_value": 234
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_22_255.raw.ini",
+        "time_index": 22,
+        "centroid": [
+            145.10476637569784,
+            219.7620466105709,
+            37.875202462401305
+        ],
+        "has_data": true,
+        "volume_voxels": 1263072,
+        "max_value": 226
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_23_255.raw.ini",
+        "time_index": 23,
+        "centroid": [
+            143.89790877337452,
+            217.64377181897862,
+            38.40613431802801
+        ],
+        "has_data": true,
+        "volume_voxels": 1231953,
+        "max_value": 217
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_24_255.raw.ini",
+        "time_index": 24,
+        "centroid": [
+            143.41817433190164,
+            216.15896035392063,
+            39.00845606021603
+        ],
+        "has_data": true,
+        "volume_voxels": 1189202,
+        "max_value": 206
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_25_255.raw.ini",
+        "time_index": 25,
+        "centroid": [
+            145.53024833513666,
+            218.3247755437917,
+            39.58618836091501
+        ],
+        "has_data": true,
+        "volume_voxels": 1125429,
+        "max_value": 213
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_26_255.raw.ini",
+        "time_index": 26,
+        "centroid": [
+            150.74584888601035,
+            226.9716629844243,
+            39.631197241938196
+        ],
+        "has_data": true,
+        "volume_voxels": 1064854,
+        "max_value": 213
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_27_255.raw.ini",
+        "time_index": 27,
+        "centroid": [
+            156.2069800583775,
+            234.60495775208489,
+            38.623983061515936
+        ],
+        "has_data": true,
+        "volume_voxels": 1008888,
+        "max_value": 207
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_28_255.raw.ini",
+        "time_index": 28,
+        "centroid": [
+            161.0609947262396,
+            239.97677418722895,
+            38.001375509138846
+        ],
+        "has_data": true,
+        "volume_voxels": 977125,
+        "max_value": 214
+    },
+    {
+        "filename": "volume_chlorophyll_data_time_29_255.raw.ini",
+        "time_index": 29,
+        "centroid": [
+            165.11374596298023,
+            246.65606406447412,
+            38.600715328885606
+        ],
+        "has_data": true,
+        "volume_voxels": 917543,
+        "max_value": 215
+    }
+]
