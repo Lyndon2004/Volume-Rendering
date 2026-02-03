@@ -150,14 +150,15 @@ class WaterMassProcessor:
 if __name__ == "__main__":
     import sys
     
-    # Default Paths
+    # Default Paths - 指向 Unity 项目的 MyData 文件夹
     try:
         base_dir = os.path.dirname(__file__)
     except NameError:
         base_dir = "."
-        
-    WORKSPACE_DIR = os.path.abspath(os.path.join(base_dir, "../Data"))
-    OUTPUT_DIR = "MultiVarOutput"
+    
+    # Unity MyData 文件夹路径
+    WORKSPACE_DIR = os.path.abspath(os.path.join(base_dir, "../RenderingModule/Assets/MyData"))
+    OUTPUT_DIR = os.path.abspath(os.path.join(base_dir, "../RenderingModule/Assets/WaterMassOutput"))
 
     # User Configuration
     # You can also pass these as arguments
@@ -165,26 +166,22 @@ if __name__ == "__main__":
         WORKSPACE_DIR = sys.argv[1]
     
     print(f"Data Source: {WORKSPACE_DIR}")
+    print(f"Output Dir:  {OUTPUT_DIR}")
     
     processor = WaterMassProcessor(WORKSPACE_DIR)
     
-    # 1. Register Variables from subdirectories
-    # Patterns point to: Data/chlorophyll/*.raw.ini, etc.
-    processor.register_variable("chloro", "chlorophyll/*chlorophyll*.raw.ini")
-    processor.register_variable("no3",    "NO3/*NO3*.raw.ini") 
-    processor.register_variable("salt",   "salt/*salt*.raw.ini")
+    # 1. 注册三个海洋变量
+    processor.register_variable("chloro", "chlorophyll/*chlorophyll*.raw.ini")  # 叶绿素
+    processor.register_variable("no3",    "NO3/*NO3*.raw.ini")                   # 硝酸盐
+    processor.register_variable("salt",   "salt/*salt*.raw.ini")                 # 盐度
     
-    # 2. Define Logic
-    # Example: High Chlorophyll AND Low NO3
-    # Use variable names defined above: chloro, no3, salt
-    # Note: Values depend on your data range (0-255 for uint8)
-    
-    # Example logic:
-    # "Chlorophyll bloom where NO3 is depleted?"
-    # Just an example hypothesis.
-    logic = "(chloro > 50) & (no3 < 100)" 
+    # 2. 定义水团逻辑公式
+    # 示例：高叶绿素(>50) + 低硝酸盐(<100) + 中等盐度(30-200) 的区域
+    # 值范围是 0-255 (uint8 归一化数据)
+    # 您可以根据海洋学家的建议修改这些阈值
+    logic = "(chloro > 50) & (no3 < 100) & (salt > 30) & (salt < 200)"
     
     print(f"Executing Logic: {logic}")
     
-    # 3. Process
-    processor.process_sequence(OUTPUT_DIR, logic, mesh_name_prefix="BioWaterMass")
+    # 3. 执行处理
+    processor.process_sequence(OUTPUT_DIR, logic, mesh_name_prefix="MultiVar_WaterMass")
