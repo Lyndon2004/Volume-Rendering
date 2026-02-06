@@ -45,19 +45,21 @@
 ### 第一阶段：数据转换 (Python 后端)
 *   **目标：** 支持多变量过滤与几何提取。
 *   **任务：**
-    *   [ ] 更新 `check_data_format.py`，支持处理盐度和温度数据。
-    *   [ ] 创建 `extract_isosurface.py`，使用 `skimage.measure.marching_cubes` 或 VTK。
-        *   **输入：** 原始数据（DO, Salt, Temp）。
-        *   **逻辑：** 基于用户配置进行过滤（例如 NumPy 布尔索引）。
-        *   **输出：** 每一帧的 `.obj` 或 `.fbx` 模型序列。
-    *   [ ] 创建 `calculate_trajectory.py`，输出每帧质心坐标的 JSON 列表。
+    *   [x] 更新 `check_data_format.py` / 创建 `volume_loader.py`，支持处理多变量数据（如盐度、温度、叶绿素）。
+    *   [x] 创建 `extract_isosurface.py`，使用 `skimage.measure.marching_cubes` 提取等值面。
+        *   **输入：** 原始数据（DO, Salt, Temp 等）。
+        *   **逻辑：** 基于用户配置进行过滤（支持 `multi_var_processor.py` 中的逻辑公式）。
+        *   **输出：** 每一帧的 `.obj` 模型序列。
+    *   [x] 创建 `calculate_trajectory.py`，输出每帧质心坐标的 JSON 列表。
+    *   [x] 开发 `multi_var_processor.py`，支持多变量联合分析与批量处理。
 
-### 第二阶段：渲染引擎 (Unity 前端)
+### 第二阶段：渲染引擎
 *   **目标：** 可视化“外壳”和“路径”。
 *   **任务：**
-    *   [ ] **Mesh 序列播放器：** 编写脚本高效切换 Mesh 对象（避免 `Instantiate/Destroy` 带来的卡顿），像定格动画一样播放水团形状。
-    *   [ ] **轨迹渲染器：** 使用 Unity `LineRenderer` 绘制路径。根据时间进行颜色编码（起点=蓝色，终点=红色）。
-    *   [ ] **幽灵/洋葱皮效果：**（可选）显示前几年水团的淡出轮廓，以可视化“流动”趋势。
+    *   [x] **Mesh 序列播放器：** `MeshSequencePlayer.cs` - 高效切换 Mesh 对象，实现定格动画式播放。
+    *   [x] **轨迹渲染器：** `TrajectoryRenderer.cs` - 使用 `LineRenderer` 绘制路径，支持蓝→红渐变色。
+    *   [x] **OBJ 加载器：** `SimpleObjLoader.cs` - 运行时解析 `.obj` 文件。
+    *   [x] **总控制器：** `WaterMassManager.cs` - 读取 JSON、协调各组件同步。
 
 ### 第三阶段：UI 与交互
 *   **目标：** 面向研究者的控制面板。

@@ -1,0 +1,302 @@
+[
+  {
+    "time_index": 0,
+    "centroid": [
+      0.11747388073098051,
+      0.4143641874945505,
+      0.5551093239507414
+    ],
+    "volume_voxels": 27853,
+    "raw_file": "water_mass_highlighted_t0.raw"
+  },
+  {
+    "time_index": 1,
+    "centroid": [
+      0.10172459159002337,
+      0.39987342700071354,
+      0.5322678852626054
+    ],
+    "volume_voxels": 32387,
+    "raw_file": "water_mass_highlighted_t1.raw"
+  },
+  {
+    "time_index": 2,
+    "centroid": [
+      0.09819150577672732,
+      0.380741213190917,
+      0.5169913202564032
+    ],
+    "volume_voxels": 36349,
+    "raw_file": "water_mass_highlighted_t2.raw"
+  },
+  {
+    "time_index": 3,
+    "centroid": [
+      0.08664314010021734,
+      0.3843837269194598,
+      0.5078469169832873
+    ],
+    "volume_voxels": 40269,
+    "raw_file": "water_mass_highlighted_t3.raw"
+  },
+  {
+    "time_index": 4,
+    "centroid": [
+      0.08168131280894206,
+      0.40758987429857896,
+      0.5143531434424231
+    ],
+    "volume_voxels": 41006,
+    "raw_file": "water_mass_highlighted_t4.raw"
+  },
+  {
+    "time_index": 5,
+    "centroid": [
+      0.09138611803823773,
+      0.41223318781655083,
+      0.5278556213632585
+    ],
+    "volume_voxels": 38496,
+    "raw_file": "water_mass_highlighted_t5.raw"
+  },
+  {
+    "time_index": 6,
+    "centroid": [
+      0.1024804410200966,
+      0.39292042362329094,
+      0.5286442820057384
+    ],
+    "volume_voxels": 36595,
+    "raw_file": "water_mass_highlighted_t6.raw"
+  },
+  {
+    "time_index": 7,
+    "centroid": [
+      0.11049494303650315,
+      0.3562766924951799,
+      0.5120597593582887
+    ],
+    "volume_voxels": 37400,
+    "raw_file": "water_mass_highlighted_t7.raw"
+  },
+  {
+    "time_index": 8,
+    "centroid": [
+      0.13593712893682913,
+      0.29725973910320747,
+      0.4806356738587776
+    ],
+    "volume_voxels": 40461,
+    "raw_file": "water_mass_highlighted_t8.raw"
+  },
+  {
+    "time_index": 9,
+    "centroid": [
+      0.13704691490677137,
+      0.28392243105604176,
+      0.4717745415318231
+    ],
+    "volume_voxels": 40788,
+    "raw_file": "water_mass_highlighted_t9.raw"
+  },
+  {
+    "time_index": 10,
+    "centroid": [
+      0.1207763920757135,
+      0.29393021878571013,
+      0.47652403473212723
+    ],
+    "volume_voxels": 39963,
+    "raw_file": "water_mass_highlighted_t10.raw"
+  },
+  {
+    "time_index": 11,
+    "centroid": [
+      0.11776541615150038,
+      0.2866027359828796,
+      0.46613247026577265
+    ],
+    "volume_voxels": 40862,
+    "raw_file": "water_mass_highlighted_t11.raw"
+  },
+  {
+    "time_index": 12,
+    "centroid": [
+      0.1437105990828338,
+      0.2863160568204634,
+      0.47539493230933094
+    ],
+    "volume_voxels": 35677,
+    "raw_file": "water_mass_highlighted_t12.raw"
+  },
+  {
+    "time_index": 13,
+    "centroid": [
+      0.13860902802301667,
+      0.29168183438369777,
+      0.484071607740086
+    ],
+    "volume_voxels": 33488,
+    "raw_file": "water_mass_highlighted_t13.raw"
+  },
+  {
+    "time_index": 14,
+    "centroid": [
+      0.11408669883425966,
+      0.30121481830003854,
+      0.48114267848404113
+    ],
+    "volume_voxels": 36782,
+    "raw_file": "water_mass_highlighted_t14.raw"
+  },
+  {
+    "time_index": 15,
+    "centroid": [
+      0.11244639852358464,
+      0.2888131332433098,
+      0.4717687265917603
+    ],
+    "volume_voxels": 40050,
+    "raw_file": "water_mass_highlighted_t15.raw"
+  },
+  {
+    "time_index": 16,
+    "centroid": [
+      0.14602068972585658,
+      0.280662357926224,
+      0.4738606956703947
+    ],
+    "volume_voxels": 38179,
+    "raw_file": "water_mass_highlighted_t16.raw"
+  },
+  {
+    "time_index": 17,
+    "centroid": [
+      0.13324423805696248,
+      0.2792532780538639,
+      0.4726839966631684
+    ],
+    "volume_voxels": 37161,
+    "raw_file": "water_mass_highlighted_t17.raw"
+  },
+  {
+    "time_index": 18,
+    "centroid": [
+      0.11853316248121369,
+      0.28467756530398874,
+      0.4700792867241968
+    ],
+    "volume_voxels": 41022,
+    "raw_file": "water_mass_highlighted_t18.raw"
+  },
+  {
+    "time_index": 19,
+    "centroid": [
+      0.10060922302798778,
+      0.3067782279603869,
+      0.474709584157555
+    ],
+    "volume_voxels": 46003,
+    "raw_file": "water_mass_highlighted_t19.raw"
+  },
+  {
+    "time_index": 20,
+    "centroid": [
+      0.10643721493017363,
+      0.3376984274553232,
+      0.4993266204415836
+    ],
+    "volume_voxels": 42257,
+    "raw_file": "water_mass_highlighted_t20.raw"
+  },
+  {
+    "time_index": 21,
+    "centroid": [
+      0.1257533452809107,
+      0.3611555814663116,
+      0.5266511555980431
+    ],
+    "volume_voxels": 35566,
+    "raw_file": "water_mass_highlighted_t21.raw"
+  },
+  {
+    "time_index": 22,
+    "centroid": [
+      0.1261235567501552,
+      0.3674721303772924,
+      0.5313367514838103
+    ],
+    "volume_voxels": 34034,
+    "raw_file": "water_mass_highlighted_t22.raw"
+  },
+  {
+    "time_index": 23,
+    "centroid": [
+      0.12504431435683508,
+      0.36258335737291475,
+      0.527487433147266
+    ],
+    "volume_voxels": 34217,
+    "raw_file": "water_mass_highlighted_t23.raw"
+  },
+  {
+    "time_index": 24,
+    "centroid": [
+      0.13109611390339881,
+      0.35182919877896524,
+      0.521173255509301
+    ],
+    "volume_voxels": 34351,
+    "raw_file": "water_mass_highlighted_t24.raw"
+  },
+  {
+    "time_index": 25,
+    "centroid": [
+      0.13952512905234157,
+      0.3327134514496594,
+      0.5096079039350547
+    ],
+    "volume_voxels": 35476,
+    "raw_file": "water_mass_highlighted_t25.raw"
+  },
+  {
+    "time_index": 26,
+    "centroid": [
+      0.1296831997251354,
+      0.3177694232682112,
+      0.49769782955806335
+    ],
+    "volume_voxels": 36951,
+    "raw_file": "water_mass_highlighted_t26.raw"
+  },
+  {
+    "time_index": 27,
+    "centroid": [
+      0.11030585346885625,
+      0.31024580866733825,
+      0.4804086288477537
+    ],
+    "volume_voxels": 38464,
+    "raw_file": "water_mass_highlighted_t27.raw"
+  },
+  {
+    "time_index": 28,
+    "centroid": [
+      0.11956489601571398,
+      0.320653304193181,
+      0.49631467683756136
+    ],
+    "volume_voxels": 33822,
+    "raw_file": "water_mass_highlighted_t28.raw"
+  },
+  {
+    "time_index": 29,
+    "centroid": [
+      0.1431282184335161,
+      0.32953852455651356,
+      0.516995043997168
+    ],
+    "volume_voxels": 29661,
+    "raw_file": "water_mass_highlighted_t29.raw"
+  }
+]

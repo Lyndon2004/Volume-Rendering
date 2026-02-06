@@ -12,6 +12,10 @@ namespace WaterMass
         public string filePrefix = "WaterMass_t";
         public string fileExtension = ".obj";
         
+        [Header("Coordinate Transform")]
+        [Tooltip("Apply 90 degree X rotation to match VolumeSTCube coordinate system")]
+        public bool applyVolumeRotation = true;
+        
         [Header("Material Settings")]
         public Color meshColor = new Color(0.2f, 0.6f, 0.9f, 0.7f); // Light blue, semi-transparent
         
@@ -29,6 +33,13 @@ namespace WaterMass
         {
             mf = GetComponent<MeshFilter>();
             mr = GetComponent<MeshRenderer>();
+            
+            // Apply rotation to match VolumeSTCube coordinate system
+            if (applyVolumeRotation)
+            {
+                transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
+                Debug.Log("🔄 Applied 90° X rotation to match VolumeSTCube coordinates");
+            }
             
             // Ensure we have a material
             EnsureMaterial();

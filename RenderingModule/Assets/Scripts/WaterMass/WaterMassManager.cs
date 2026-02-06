@@ -20,9 +20,17 @@ namespace WaterMass
         [Header("References")]
         public TrajectoryRenderer trajectoryRenderer;
         public MeshSequencePlayer meshPlayer;
+        // public BoundingBoxDisplay boundingBox; // TODO: Add after creating boundary mesh from data
+        
+        [Header("Auto Play Settings")]
+        public bool autoPlay = true;
+        public float secondsPerFrame = 1.0f;
+        public bool loop = true;
 
         private List<TrajectoryData> trajectoryData;
         private int maxTimeIndex = 0;
+        private int currentTimeIndex = 0;
+        private float timer = 0f;
 
         void Start()
         {
@@ -93,6 +101,12 @@ namespace WaterMass
                     Debug.Log($"🔧 Applied position offset: {-positionOffset} to mesh container");
                 }
                 
+                // Sync bounding box offset if assigned
+                // if (boundingBox != null)
+                // {
+                //     boundingBox.positionOffset = positionOffset;
+                // }
+                
                 // Start at time 0
                 SetTime(0);
             }
@@ -114,6 +128,7 @@ namespace WaterMass
             
             // Clamp
             timeIndex = Mathf.Clamp(timeIndex, 0, maxTimeIndex);
+            currentTimeIndex = timeIndex;
 
             // Update Mesh
             meshPlayer.SetMesh(timeIndex);
@@ -123,6 +138,71 @@ namespace WaterMass
             
             // Here you would also update the 2D UI Chart
             // UIChart.Highlight(timeIndex, trajectoryData[timeIndex].volume_voxels);
+        }
+        
+        void Update()
+        {
+            if (!autoPlay || trajectoryData == null || maxTimeIndex == 0) return;
+            
+            timer += Time.deltaTime;
+            if (timer >= secondsPerFrame)
+            {
+                timer = 0f;
+                
+                // Advance to next frame
+                int nextIndex = currentTimeIndex + 1;
+                
+                if (nextIndex > maxTimeIndex)
+                {
+                    if (loop)
+                    {
+                        nextIndex = 0;
+                        Debug.Log("🔄 Looping back to start");
+                    }
+                    else
+                    {
+                        autoPlay = false;
+                        Debug.Log("⏹️ Playback finished");
+                        return;
+                    }
+                }
+                
+                SetTime(nextIndex);
+                Debug.Log($"⏱️ Time: {currentTimeIndex}/{maxTimeIndex}, Volume: {trajectoryData[currentTimeIndex].volume_voxels} voxels");
+            }
+        }
+        
+        // Keyboard controls for testing
+        void LateUpdate()
+        {
+            // Space to toggle play/pause
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                autoPlay = !autoPlay;
+                Debug.Log(autoPlay ? "▶️ Playing" : "⏸️ Paused");
+            }
+            
+            // Arrow keys for manual control
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                autoPlay = false;
+                SetTime(currentTimeIndex + 1);
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                autoPlay = false;
+                SetTime(currentTimeIndex - 1);
+            }
+            
+            // Home/End for jump to start/end
+            if (Input.GetKeyDown(KeyCode.Home))
+            {
+                SetTime(0);
+            }
+            if (Input.GetKeyDown(KeyCode.End))
+            {
+                SetTime(maxTimeIndex);
+            }
         }
     }
 }

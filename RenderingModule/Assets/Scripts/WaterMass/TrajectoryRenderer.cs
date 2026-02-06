@@ -14,6 +14,9 @@ namespace WaterMass
         
         [Tooltip("Position offset to align with mesh (set same as WaterMassManager offset)")]
         public Vector3 positionOffset = new Vector3(220f, 180f, 10f);
+        
+        [Tooltip("Apply coordinate transform to match VolumeSTCube (swap Y and Z)")]
+        public bool applyVolumeCoordTransform = true;
 
         void Awake()
         {
@@ -41,10 +44,26 @@ namespace WaterMass
                 // If relative, we might need to transform it. For now, assuming direct mapping.
                 if (item.centroid != null)
                 {
-                    // Apply offset to bring trajectory into view
-                    Vector3 point = item.GetCentroidVector() - positionOffset;
+                    // Get raw centroid
+                    Vector3 rawPoint = item.GetCentroidVector();
+                    
+                    // Apply coordinate transform to match VolumeSTCube (90° X rotation = swap Y and Z)
+                    Vector3 point;
+                    if (applyVolumeCoordTransform)
+                    {
+                        // After 90° X rotation: (x, y, z) -> (x, -z, y)
+                        // But since our data is already in data space, we need: (x, y, z) -> (x, z, y)
+                        point = new Vector3(rawPoint.x - positionOffset.x, 
+                                           rawPoint.z - positionOffset.z,  // Z becomes Y
+                                           rawPoint.y - positionOffset.y); // Y becomes Z
+                    }
+                    else
+                    {
+                        point = rawPoint - positionOffset;
+                    }
+                    
                     fullPath.Add(point);
-                    Debug.Log($"📍 Trajectory point {item.time_index}: {point}");
+                    Debug.Log($"📍 Trajectory point {item.time_index}: raw={rawPoint}, transformed={point}");
                 }
                 else
                 {

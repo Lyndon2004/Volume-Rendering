@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "VolumeSTCube",
+			"path": "."
+		},
+		{
+			"name": "OneDrive_21_2026-1-21",
+			"path": "../../Downloads/OneDrive_21_2026-1-21"
+		}
+	],
+	"settings": {
+		"python-envs.defaultEnvManager": "ms-python.python:conda",
+		"python-envs.defaultPackageManager": "ms-python.python:conda"
+	}
+}

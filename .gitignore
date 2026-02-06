@@ -8,3 +8,5 @@ DataTransformationModule/MyData/
 
 # System Files
 .DS_Store
+RenderingModule/Assets/Scenes/mainScene.unity
+RenderingModule/Assets/Scenes/mainScene 1.unity
