@@ -61,14 +61,20 @@ class WaterMassHighlightGenerator:
     
     def generate_highlighted_volume(self, display_var: str = 'oxygen') -> np.ndarray:
         """
-        生成高亮体积 - 保持原始数据结构，只增强水团区域
+        生成高亮体积 - 背景固定值，水团区域按多变量综合强度渐变编码
         
-        策略：
-        - 保持原始数据不变
-        - 水团区域的值提升到更高范围（更亮）
+        编码策略：
+        - 0:         边界外（空气/陆地），完全透明
+        - 50:        背景海洋（固定值，各帧一致）
+        - 195-255:   水团区域（按多变量综合强度渐变），高亮
+        
+        水团综合强度评分（均分权重）：
+        - 叶绿素越高 → 得分越高 (权重 1/3)
+        - NO3 越低   → 得分越高 (权重 1/3)
+        - 盐度越居中 → 得分越高 (权重 1/3)
         
         Returns:
-            uint8 volume: 原始结构 + 水团高亮
+            uint8 volume, bool mask
         """
         if display_var not in self.variables:
             raise ValueError(f"Display variable '{display_var}' not registered")
@@ -80,20 +86,56 @@ class WaterMassHighlightGenerator:
         valid_mask = display_data > 0
         water_mass_mask = self.evaluate_mask() & valid_mask
         
-        # 创建输出：直接复制原始数据
-        output = display_data.copy()
+        # 创建输出
+        output = np.zeros_like(display_data, dtype=np.float32)
         
-        # 水团区域：将值提升到高范围 (200-255)
-        # 这样用原始 TF 也能看到高亮效果
+        # === 背景区域：固定值 50（各帧一致，不随时间变化）===
+        bg_mask = valid_mask & (~water_mass_mask)
+        output[bg_mask] = 50
+        
+        # === 水团区域：多变量综合强度编码到 195-255 ===
         if np.any(water_mass_mask):
-            water_values = display_data[water_mass_mask]
-            # 归一化到 200-255 范围
-            wmin, wmax = water_values.min(), water_values.max()
-            if wmax > wmin:
-                normalized = (water_values - wmin) / (wmax - wmin)
-                output[water_mass_mask] = (normalized * 55 + 200).astype(np.uint8)
-            else:
-                output[water_mass_mask] = 230
+            scores = np.zeros(np.sum(water_mass_mask), dtype=np.float32)
+            
+            w = 1.0 / 3.0  # 三变量均分权重
+            
+            # 叶绿素分量：越高越强，权重 1/3
+            # 条件 chloro > 50，范围约 51-208
+            if 'chloro' in self.variables:
+                chloro_vals = self.variables['chloro'][water_mass_mask]
+                c_min, c_max = chloro_vals.min(), chloro_vals.max()
+                if c_max > c_min:
+                    scores += w * (chloro_vals - c_min) / (c_max - c_min)
+                else:
+                    scores += w / 2
+            
+            # NO3 分量：越低越强（说明被消耗更多），权重 1/3
+            # 条件 no3 < 100，范围约 5-99
+            if 'no3' in self.variables:
+                no3_vals = self.variables['no3'][water_mass_mask]
+                n_min, n_max = no3_vals.min(), no3_vals.max()
+                if n_max > n_min:
+                    scores += w * (1.0 - (no3_vals - n_min) / (n_max - n_min))
+                else:
+                    scores += w / 2
+            
+            # 盐度分量：越接近中间值越强，权重 1/3
+            # 条件 salt 30-200，中心约 115
+            if 'salt' in self.variables:
+                salt_vals = self.variables['salt'][water_mass_mask]
+                s_min, s_max = salt_vals.min(), salt_vals.max()
+                if s_max > s_min:
+                    s_center = (s_min + s_max) / 2
+                    s_range = (s_max - s_min) / 2
+                    # 距中心越近分数越高
+                    scores += w * (1.0 - np.abs(salt_vals - s_center) / s_range)
+                else:
+                    scores += w / 2
+            
+            # 映射到 195-255
+            output[water_mass_mask] = scores * 60 + 195
+            
+            print(f"  📊 Composite score: min={scores.min():.3f}, mean={scores.mean():.3f}, max={scores.max():.3f}")
         
         return output.astype(np.uint8), water_mass_mask
     
