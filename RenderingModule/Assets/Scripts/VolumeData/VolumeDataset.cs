@@ -239,8 +239,7 @@ namespace UnityVolumeRendering
             await Task.Run(() =>
             {
                 minValue = GetMinDataValue();
-                //maxValue = GetMaxDataValue();
-                maxValue = 223;
+                maxValue = 255;
                 maxRange = maxValue - minValue;
             });
             progressHandler.EndStage();
@@ -341,8 +340,7 @@ namespace UnityVolumeRendering
                 if (minDataValue == float.MaxValue || maxDataValue == float.MinValue)
                     CalculateValueBounds(progressHandler);
                 minValue = GetMinDataValue();
-                //maxValue = GetMaxDataValue();
-                maxValue = 223;
+                maxValue = 255;
                 maxRange = maxValue - minValue;
             });
             progressHandler.EndStage();
